@@ -23,6 +23,8 @@ function renderData(dataArray) {
             html += '</div>';
         }
     });
+    html += '<div class="clearfix"></div>';
+    html += '<a class="btn btn-warning btn-block" href="https://raw.githubusercontent.com/ircfspace/warpkey/main/plus/full" dir="rtl" target="_blank">کلیدهای بیشتر ...</a>';
     $('#setContent').html(html);
 }
 
