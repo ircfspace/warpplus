@@ -1,6 +1,9 @@
-function copyToClipboard(text) {
+function copyToClipboard(text, key) {
     navigator.clipboard.writeText(text).then(() => {
-        alert("کلید کپی شد!");
+        $('button[data-key="'+key+'"]').html('✔️');
+        setTimeout(function() {
+            $('button[data-key="'+key+'"]').html('📋');
+        }, 2500)
     }).catch(() => {
         //
     });
@@ -11,21 +14,25 @@ function renderData(dataArray) {
     if (typeof dataArray === "undefined" || dataArray.length < 1) {
         return false;
     }
+    let x = 1;
     dataArray.forEach(function(element) {
         if ( element !== "" ) {
             html += '<div class="input-group">';
             html += '<input type="text" class="form-control" placeholder="Key" readonly value="'+element+'" />';
             html += '<div class="input-group-btn">';
-            html += '<button class="btn btn-default" onclick="copyToClipboard(\'' + element + '\')">';
+            html += '<button class="btn btn-default" onclick="copyToClipboard(\'' + element + '\', \'' + x + '\')" data-key="'+x+'">';
             html += '📋';
             html += '</button>';
             html += '</div>';
             html += '</div>';
+            x++;
         }
     });
-    html += '<div class="clearfix"></div>';
-    html += '<a class="btn btn-warning btn-block" href="https://raw.githubusercontent.com/ircfspace/warpkey/main/plus/full" dir="rtl" target="_blank">کلیدهای بیشتر ...</a>';
-    $('#setContent').html(html);
+    let loadMore = '<div class="clearfix"></div>';
+    loadMore += '<a class="btn btn-warning btn-block" href="https://raw.githubusercontent.com/ircfspace/warpkey/main/plus/full" dir="rtl" target="_blank">';
+    loadMore += 'کلیدهای بیشتر ...';
+    loadMore += '</a>';
+    $('#setContent').html(html+loadMore);
 }
 
 window.addEventListener('load', function() {
