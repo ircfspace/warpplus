@@ -1,6 +1,6 @@
 function copyToClipboard(text) {
     navigator.clipboard.writeText(text).then(() => {
-        alert("کلیک کپی شد!");
+        alert("کلید کپی شد!");
     }).catch(() => {
         //
     });
